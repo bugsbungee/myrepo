@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace WindowsService
@@ -33,6 +34,8 @@ namespace WindowsService
         static async Task HandleRequestAsync(HttpListenerContext context)
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
+            var bytes = Encoding.UTF8.GetBytes("MyString");
+            context.Response.OutputStream.Write(bytes, 0, bytes.Length);
             context.Response.Close();
         }
 
